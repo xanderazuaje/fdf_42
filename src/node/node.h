@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   node.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/24 12:14:39 by xazuaje-          #+#    #+#             */
+/*   Updated: 2023/11/24 12:14:40 by xazuaje-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STD_MODEL
 # define STD_MODEL
 # include <stdlib.h>
@@ -14,10 +26,10 @@ typedef struct s_prev_points{
 } t_prev_points;
 
 typedef struct s_point{
-    t_coords coords;
+    t_coords *coords;
     int color;
-    t_prev_points prev_points;
-    t_point *relative_pos;
+    t_prev_points *prev_points;
+    t_coords *relative_pos;
 } t_point;
 
 typedef enum {
