@@ -29,7 +29,7 @@ enum point_config{
 };
 
 t_coords create_coords(int x, int y, int z);
-// Node in memory CRUD
+// Node in-memory CRUD
 void init_node(t_point *self, t_coords, char *color, t_prev_points prev_points);
 t_point *create_node(t_coords, char *color, t_prev_points prev_points);
 void reset_point(t_point *self);
