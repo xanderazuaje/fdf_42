@@ -2,3 +2,9 @@
 build
 obj
 fdf
+
+#config
+.vscode
+
+#misc
+.DS_Store
