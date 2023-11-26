@@ -1,26 +1,50 @@
 NAME := fdf
+CC := gcc
+CFLAGS := -Wall -Werror -Wextra
 
 SRC_DIR := src/
 OBJ_DIR := obj/
 
-SRC_FILES = a
+#libraries
+LIBFT_DIR = lib/libft/
+LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
+
+LIB_DIR = $(LIBFT_DIR)
+LIB = $(LIBFT)
+
+# Source files
+NODE_FOLDER := node/
+NODE_FILES := $(addprefix $(NODE_FOLDER), \
+	create_coords\
+	create_node\
+	parse_color\
+	)
+
+SRC_FILES = $(NODE_FILES)
+SRC_DIRECTORIES = $(NODE_FOLDER)
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ =  $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
-
-CC := gcc
-CFLAGS := -Wall -Werror -Wextra
-
-
+#RULES
 all:
 	@$(MAKE) $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) -L mlx -l mlx -framework OpenGL -framework AppKit -o $(NAME)	
+$(NAME): $(LIB_DIR) $(SRC_DIRECTORIES) $(OBJ) 
+	$(CC) $(OBJ) $(LIB) -Llib/mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)	
+
+$(LIB_DIR):
+	make -C $(LIB_DIR)
+
+$(SRC_DIRECTORIES):
+	@echo creating directories 
+	@mkdir -p $(addprefix $(OBJ_DIR), $(SRC_DIRECTORIES))
+
+
+re: clean all
 
 clean:
 	@rm -rf $(OBJ_DIR)*
