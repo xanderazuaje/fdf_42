@@ -17,7 +17,10 @@ NODE_FOLDER := node/
 NODE_FILES := $(addprefix $(NODE_FOLDER), \
 	create_coords\
 	create_node\
+	destroy_node\
+	edit_node\
 	parse_color\
+	reset_node\
 	)
 
 SRC_FILES = $(NODE_FILES)
@@ -27,20 +30,19 @@ SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ =  $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
 #RULES
-all:
+all: $(SRC_DIRECTORIES)
 	@$(MAKE) $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(LIB_DIR) $(SRC_DIRECTORIES) $(OBJ) 
+$(NAME): $(LIB_DIR) $(OBJ) 
 	$(CC) $(OBJ) $(LIB) -Llib/mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)	
 
 $(LIB_DIR):
 	make -C $(LIB_DIR)
 
 $(SRC_DIRECTORIES):
-	@echo creating directories 
 	@mkdir -p $(addprefix $(OBJ_DIR), $(SRC_DIRECTORIES))
 
 
