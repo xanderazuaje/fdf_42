@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_coords.c                                    :+:      :+:    :+:   */
+/*   reset_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 12:14:30 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/25 20:43:02 by xazuaje-         ###   ########.fr       */
+/*   Created: 2023/11/26 05:41:19 by xazuaje-          #+#    #+#             */
+/*   Updated: 2023/11/26 17:30:21 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "node.h"
 
-t_coords	*create_coords(int x, int y, int z)
+void	reset_node(t_node *self)
 {
-	t_coords	*coords;
-
-	coords = (t_coords *)malloc(sizeof(t_coords));
-	coords->x = x;
-	coords->y = y;
-	coords->z = z;
-	return (coords);
+	self->color = 0xFFFFFFFF;
+	self->coords->x = 0;
+	self->coords->x = 0;
+	self->coords->z = 0;
+	self->relative_pos = 0;
+	self->h_next = NULL;
+	self->v_next = NULL;
 }
