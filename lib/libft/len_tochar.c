@@ -6,13 +6,13 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:48:30 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/25 04:04:29 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/11/25 16:58:57 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	*len_tochar(const char *s, int c)
+size_t	len_tochar(const char *s, int c)
 {
 	size_t	i;
 

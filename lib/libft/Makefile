@@ -44,27 +44,23 @@ SOURCE = ft_isalpha\
 	ft_lstclear\
 	ft_lstiter\
 	ft_lstmap\
+	ft_lstnew\
 	len_tochar
 
-BONUS = ft_lstnew
 
 OBJS = $(SOURCE:=.o)
-BONUS_OBJS = $(BONUS:=.o)
 
 $(NAME): $(OBJS)
-	ar -r $(NAME) $(OBJS)
+	@ar -r $(NAME) $(OBJS)
+	@echo compiling...
 
-all: $(NAME)
-
-bonus:$(OBJS) $(BONUS_OBJS)
-	ar -r $(NAME) $(OBJS) $(BONUS_OBJS)
-
+all: $(NAME) 
 
 clean:
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 
