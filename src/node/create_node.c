@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:15:42 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/26 18:14:11 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:20:26 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,4 @@ static t_coords	*create_coords(int x, int y, int z)
 	coords->y = y;
 	coords->z = z;
 	return (coords);
-}
-
-int main()
-{
-	return 0;
 }
