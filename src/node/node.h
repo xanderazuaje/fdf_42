@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:14:39 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/26 18:05:07 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:36:45 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_node
 	int			color;
 }				t_node;
 
-typedef enum s_node_config
+typedef enum e_node_config
 {
 	X,
 	Y,
@@ -47,14 +47,6 @@ typedef union u_config_param
 	int			color_coord_val;
 	t_node		*node_location;	
 }	t_config_param;
-
-// Data structures
-
-typedef struct s_array
-{
-	int			len;
-	void		*list;
-}				t_array;
 
 // Node in-memory CRUD
 t_node			*create_node(int x, int y, int z, char *color);

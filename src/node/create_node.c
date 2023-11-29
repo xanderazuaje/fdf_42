@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:15:42 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/26 18:20:26 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:05:57 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ t_node	*create_node(int x, int y, int z, char *color)
 	t_node	*node;
 
 	node = (t_node *)malloc(sizeof(t_node));
+	ft_bzero(node, sizeof(t_node));
 	node->coords = create_coords(x, y, z);
-	node->h_next = NULL;
-	node->v_next = NULL;
 	node->color = parse_color(color);
 	return (node);
 }
