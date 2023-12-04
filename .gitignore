@@ -2,6 +2,7 @@
 build
 obj
 fdf
+*.o
 
 #config
 .vscode
