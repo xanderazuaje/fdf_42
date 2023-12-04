@@ -1,63 +1,60 @@
-NAME := fdf
+# Compiler and flags
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address
 
-SRC_DIR := src/
-OBJ_DIR := obj/
-
-# Libraries
-LIBFT_DIR = lib/libft/
-LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
-
-LIB_DIR = $(LIBFT_DIR)
-LIB = $(LIBFT)
+# Directories
+SRC_DIR := src
+OBJ_DIR := obj
+LIB_DIR := lib
+MINILIB_DIR := $(SRC_DIR)/minilib
+NODE_DIR := $(SRC_DIR)/node
+MATH_DIR := $(SRC_DIR)/math
+MLX_DIR := $(LIB_DIR)/mlx
+LIBFT_DIR := $(LIB_DIR)/libft
 
 # Source files
-NODE_FOLDER := node/
-NODE_FILES := create_node\
-	destroy_node\
-	edit_node\
-	get_interpolation\
-	parse_color\
-	reset_node
+SRC_FILES := $(SRC_DIR)/main.c \
+             $(MINILIB_DIR)/draw_line.c \
+             $(MINILIB_DIR)/exittt.c \
+             $(MINILIB_DIR)/get_interpolation.c \
+             $(MINILIB_DIR)/init_minilib.c \
+             $(MINILIB_DIR)/key_action.c \
+             $(MINILIB_DIR)/loop_minilib.c \
+             $(MINILIB_DIR)/parse_color.c \
+             $(MINILIB_DIR)/put_pixel.c \
+             $(MINILIB_DIR)/set_minilib.c \
+             $(NODE_DIR)/create_node.c \
+             $(NODE_DIR)/edit_node.c \
+             $(NODE_DIR)/create_matrix.c \
+             $(MATH_DIR)/abs.c
 
-MINILIB_FOLDER := minilib/
-MINILIB_FILES := init_minilib\
-	exittt\
-	key_action\
-	draw_line\
-	put_pixel
+# Object files
+OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
-SRC_FILES = $(addprefix $(NODE_FOLDER), $(NODE_FILES))\
-	$(addprefix $(MINILIB_FOLDER), $(MINILIB_FILES))\
-	main
+# Libraries
+LIBS := -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
-SRC_DIRECTORIES = $(NODE_FOLDER) $(MINILIB_FOLDER)
+# Executable
+TARGET := fdf
 
-SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+# Build rule
+$(TARGET): $(OBJ_FILES)
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
-# Rules
-all: $(NAME)
-
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+# Object file rule
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ) | $(LIB_DIR)
-	$(CC) $(OBJ) $(LIB) -Llib/mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+# Phony targets
+.PHONY: all clean fclean re
 
-$(LIB_DIR):
-	make -C $(LIB_DIR)
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR) $(addprefix $(OBJ_DIR), $(SRC_DIRECTORIES))
-
-re: fclean all
+all: $(TARGET)
 
 clean:
 	rm -rf $(OBJ_DIR)
-	@echo "All objects were cleaned up!"
 
 fclean: clean
-	rm -f $(NAME)
-	@echo "Deleted compiled $(NAME)"
+	rm -f $(TARGET)
+
+re: fclean all
