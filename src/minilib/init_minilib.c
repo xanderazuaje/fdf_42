@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 #include "minilib.h"
-#include <stdio.h>
+
+#define IMG_W 2000
+#define IMG_H 2000
 
 int	init_minilib(void **mlx, t_img *img, void **win)
 {
@@ -20,6 +22,8 @@ int	init_minilib(void **mlx, t_img *img, void **win)
 	img->img_buff = mlx_new_image(*mlx, 2000, 2000);
 	img->img_addr = mlx_get_data_addr(img->img_buff, &img->bits_per_pixel, &img->size_line,
 		&img->endian);
+	img->w = IMG_W;
+	img->h = IMG_H;
 	mlx_hook(*win, 17, (1L << 17), &exittt, img);
 	return (0);
 }

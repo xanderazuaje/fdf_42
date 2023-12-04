@@ -19,7 +19,7 @@ typedef struct s_errors
 	int		e2;
 }			t_error;
 
-static void	adjust_err(int *diff, int *coords, int *signs,
+static void	adjust_err(int *diff, int *abs_pos, int *signs,
 				t_error *error);
 
 void	draw_line(t_node *node1, t_node *node2, t_img *img)
@@ -29,20 +29,20 @@ void	draw_line(t_node *node1, t_node *node2, t_img *img)
 	int		signs[2];
 	t_error	error;
 
-	coords[0] = node1->coords->x;
-	coords[1] = node1->coords->y;
-	diff[0] = abs(node2->coords->x - coords[0]);
-	diff[1] = abs(node2->coords->y - coords[1]);
-	if (coords[0] < node2->coords->x)
+	coords[0] = node1->abs_pos.x;
+	coords[1] = node1->abs_pos.y;
+	diff[0] = abs(node2->abs_pos.x - coords[0]);
+	diff[1] = abs(node2->abs_pos.y - coords[1]);
+	if (coords[0] < node2->abs_pos.x)
 		signs[0] = 1;
 	else
 		signs[0] = -1;
-	if (coords[1] < node2->coords->y)
+	if (coords[1] < node2->abs_pos.y)
 		signs[1] = 1;
 	else
 		signs[1] = -1;
 	error.err = diff[0] - diff[1];
-	while (coords[0] != node2->coords->x && coords[1] != node2->coords->y)
+	while (coords[0] != node2->abs_pos.x && coords[1] != node2->abs_pos.y)
 	{
 		put_pixel(img, coords[0], coords[1], 0xFFAABB);
 		error.e2 = 2 * error.err;

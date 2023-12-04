@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   get_interpolation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/25 16:19:05 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/12/03 18:57:46 by xazuaje-         ###   ########.fr       */
+/*   Created: 2023/11/26 05:18:41 by xazuaje-          #+#    #+#             */
+/*   Updated: 2023/11/30 15:23:20 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include "../lib/libft/libft.h"
-# include <mlx.h>
-# include "./node/node.h"
-# include "./math/math.h"
-# include "./minilib/minilib.h"
-#endif
+#include "minilib.h"
+
+int	get_interpolation(int c_dest, int c_origin, int steps)
+{
+	return ((c_origin - c_dest) / steps);
+}

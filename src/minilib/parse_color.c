@@ -6,11 +6,11 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:43:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/27 23:15:04 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:23:29 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "node.h"
+#include "minilib.h"
 #include "stdio.h"
 
 int	parse_color(char *hex)

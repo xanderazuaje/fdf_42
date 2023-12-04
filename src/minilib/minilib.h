@@ -6,13 +6,15 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:58:32 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/29 13:09:00 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:08:34 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINILIB_H 
 # define MINILIB_H
 # include "../fdf.h"
+
+typedef struct s_node t_node;
 
 enum
 {
@@ -46,4 +48,5 @@ int			key_action(int key, t_img *img);
 int			init_minilib(void **mlx, t_img *img, void **win);
 void		put_pixel(t_img *img, int x, int y, int color);
 void		draw_line(t_node *node1, t_node *node2, t_img *img);
+void		set_minilib(void **mlx, void **win, t_img *img);
 #endif

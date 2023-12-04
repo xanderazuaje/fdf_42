@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_node.c                                     :+:      :+:    :+:   */
+/*   abs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 17:35:31 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/26 17:38:58 by xazuaje-         ###   ########.fr       */
+/*   Created: 2023/12/03 18:56:10 by xazuaje-          #+#    #+#             */
+/*   Updated: 2023/12/03 18:57:22 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "node.h"
+#include "math.h"
 
-void	destroy_node(t_node *self)
+int abs(int n)
 {
-	free(self->coords);
-	free(self->relative_pos);
-	free(self);
+    if (n > 0)
+        return n;
+    return -n;
 }

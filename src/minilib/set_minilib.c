@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_interpolation.c                                :+:      :+:    :+:   */
+/*   set_minilib.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 05:18:41 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/26 17:51:12 by xazuaje-         ###   ########.fr       */
+/*   Created: 2023/11/30 14:03:50 by xazuaje-          #+#    #+#             */
+/*   Updated: 2023/11/30 21:02:09 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "node.h"
+#include "minilib.h"
 
-int	get_interpolation(int c_dest, int c_origin, int steps)
+void	set_minilib(void **mlx, void **win, t_img *img)
 {
-	return ((c_origin - c_dest) / steps);
+	mlx_put_image_to_window(*mlx, *win, img->img_buff, 0, 0);
+	mlx_hook(*win, 2, 1L << 0, key_action, img->img_buff);
+	mlx_loop(*mlx);
 }
