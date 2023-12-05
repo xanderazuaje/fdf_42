@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:15:42 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/12/04 20:07:07 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/12/05 01:25:18 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_node	create_node(int x, int y, int z, int color)
 	t_node	node;
 
 	ft_bzero(&node, sizeof(t_node));
-	node.abs_pos = create_coords(x, y, z);
+	node.relative_pos = create_coords(x, y, z);
 	node.color = color;
 	return (node);
 }

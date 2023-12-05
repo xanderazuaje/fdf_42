@@ -17,17 +17,19 @@
 
 int	main(void)
 {
-	// void	*mlx;
-	// void	*win;
-	// t_img	img;
+	void	*mlx;
+	void	*win;
+	t_img	img;
 	t_matrix *matrix;
 	int	raw_matrix[][3] = {
 		{12, 12 ,12},
 		{12, 12, 12},
 		{12, 12, 12}
-		};
-	// init_minilib(&mlx, &img, &win);
+	};
+	init_minilib(&mlx, &img, &win);
 	matrix = create_matrix(3, 3, raw_matrix);
-	// set_minilib(&mlx, &win, &img);
+	matrix->scalar = 10;
+	calculate_position(matrix, &img);
+	set_minilib(&mlx, &win, &img);
 	return (0);
 }

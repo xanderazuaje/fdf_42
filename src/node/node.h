@@ -14,6 +14,8 @@
 # define NODE_H
 # include "../fdf.h"
 
+typedef struct s_img t_img;
+
 typedef struct s_coords
 {
 	int				x;
@@ -60,5 +62,6 @@ t_node				create_node(int x, int y, int z, int color);
 void				reset_node(t_node *self);
 void				edit_node(t_node_config config, t_node *self,
 						t_config_param new_value);
-t_matrix	*create_matrix(int w, int h, int raw_matrix[w][h]);
+t_matrix			*create_matrix(int w, int h, int raw_matrix[w][h]);
+void				calculate_position(t_matrix *matrix, t_img *img);
 #endif
