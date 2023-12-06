@@ -12,14 +12,14 @@
 
 #include "minilib.h"
 
-#define IMG_W 2000
-#define IMG_H 2000
+#define IMG_W 1000
+#define IMG_H 1000
 
 int	init_minilib(void **mlx, t_img *img, void **win)
 {
 	*mlx = mlx_init();
-	*win = mlx_new_window(*mlx, 2000, 2000, "FdF by Sausage");
-	img->img_buff = mlx_new_image(*mlx, 2000, 2000);
+	*win = mlx_new_window(*mlx, IMG_W, IMG_H, "FdF by Sausage");
+	img->img_buff = mlx_new_image(*mlx, IMG_W, IMG_H);
 	img->img_addr = mlx_get_data_addr(img->img_buff, &img->bits_per_pixel, &img->size_line,
 		&img->endian);
 	img->w = IMG_W;

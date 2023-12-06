@@ -19,13 +19,14 @@ SRC_FILES := $(SRC_DIR)/main.c \
              $(MINILIB_DIR)/get_interpolation.c \
              $(MINILIB_DIR)/init_minilib.c \
              $(MINILIB_DIR)/key_action.c \
-             $(MINILIB_DIR)/loop_minilib.c \
              $(MINILIB_DIR)/parse_color.c \
              $(MINILIB_DIR)/put_pixel.c \
              $(MINILIB_DIR)/set_minilib.c \
              $(NODE_DIR)/create_node.c \
              $(NODE_DIR)/edit_node.c \
              $(NODE_DIR)/create_matrix.c \
+             $(NODE_DIR)/calculate_position.c \
+             $(NODE_DIR)/draw_matrix.c \
              $(MATH_DIR)/abs.c
 
 # Object files

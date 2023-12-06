@@ -42,7 +42,7 @@ void	draw_line(t_node *node1, t_node *node2, t_img *img)
 	else
 		signs[1] = -1;
 	error.err = diff[0] - diff[1];
-	while (coords[0] != node2->abs_pos.x && coords[1] != node2->abs_pos.y)
+	while (coords[0] != node2->abs_pos.x || coords[1] != node2->abs_pos.y)
 	{
 		put_pixel(img, coords[0], coords[1], 0xFFAABB);
 		error.e2 = 2 * error.err;

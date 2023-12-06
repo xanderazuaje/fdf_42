@@ -63,5 +63,6 @@ void				reset_node(t_node *self);
 void				edit_node(t_node_config config, t_node *self,
 						t_config_param new_value);
 t_matrix			*create_matrix(int w, int h, int raw_matrix[w][h]);
-void				calculate_position(t_matrix *matrix, t_img *img);
+void				calculate_position(t_matrix *matrix, t_img *img);   
+void				draw_matrix(t_matrix *matrix, t_img *img);
 #endif

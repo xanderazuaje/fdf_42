@@ -20,12 +20,12 @@ void	calculate_position(t_matrix *matrix, t_img *img)
 	i = 0;
 	while (i < (matrix->columns * matrix->rows))
 	{
-		c_element = &matrix->elements[i];
-		c_element->abs_pos.x = (img->w / 2) + (c_element->relative_pos.x * matrix->scalar);
-		c_element->abs_pos.y = (img->h / 2) + (c_element->relative_pos.y * matrix->scalar);
+		c_element = &((matrix->elements)[i]);
+		c_element->abs_pos.x = (img->w / 2) + (c_element->relative_pos.x * matrix->scalar) - (matrix->columns * matrix->scalar / 2);
+		c_element->abs_pos.y = (img->h / 2) + (c_element->relative_pos.y * matrix->scalar) - (matrix->rows * matrix->scalar / 2);
 		//printf("x = %d, y = %d, ", c_element->abs_pos.x, c_element->abs_pos.y);
-		c_element->abs_pos.y += c_element->relative_pos.z * matrix->scalar;
-		//printf("z = %d\n", c_element->abs_pos.y);  
+		c_element->abs_pos.y -= c_element->relative_pos.z * (matrix->scalar / 2);
+		//printf("z = %d\n", c_element->abs_pos.y);
 		//printf("Relative x = %d, y = %d, z = %d \n", c_element->relative_pos.x, c_element->relative_pos.y, c_element->relative_pos.z);
 		i++;
 	}

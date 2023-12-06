@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_node.c                                      :+:      :+:    :+:   */
+/*   draw_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 12:15:42 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/12/05 17:57:17 by xazuaje-         ###   ########.fr       */
+/*   Created: 2023/12/05 17:39:54 by xazuaje-          #+#    #+#             */
+/*   Updated: 2023/12/05 23:32:41 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "node.h"
-#include <stdlib.h>
 
-static t_coords	create_coords(int x, int y, int z);
-
-t_node	create_node(int x, int y, int z, int color)
+void draw_matrix(t_matrix *matrix, t_img *img)
 {
-	t_node	node;
+    t_node *c_node;
+    int i;
 
-	ft_bzero(&node, sizeof(t_node));
-	node.relative_pos = create_coords(x, y, z);
-	node.color = color;
-	return (node);
-}
-
-static t_coords	create_coords(int x, int y, int z)
-{
-	t_coords	coords;
-
-	coords.x = x;
-	coords.y = y;
-	coords.z = z;
-	return (coords);
+    i = 0;
+    while (i < (matrix->columns * matrix->rows))
+    {
+        c_node = &((matrix->elements)[i]);
+        if(c_node->h_next)
+            draw_line(c_node, c_node->h_next, img);
+        if(c_node->v_next)
+            draw_line(c_node, c_node->v_next, img);
+        i++;
+    }
 }
