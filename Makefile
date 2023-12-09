@@ -8,7 +8,6 @@ OBJ_DIR := obj
 LIB_DIR := lib
 MINILIB_DIR := $(SRC_DIR)/minilib
 NODE_DIR := $(SRC_DIR)/node
-MATH_DIR := $(SRC_DIR)/math
 MLX_DIR := $(LIB_DIR)/mlx
 LIBFT_DIR := $(LIB_DIR)/libft
 
@@ -27,7 +26,6 @@ SRC_FILES := $(SRC_DIR)/main.c \
              $(NODE_DIR)/create_matrix.c \
              $(NODE_DIR)/calculate_position.c \
              $(NODE_DIR)/draw_matrix.c \
-             $(MATH_DIR)/abs.c
 
 # Object files
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

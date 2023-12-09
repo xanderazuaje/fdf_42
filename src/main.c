@@ -21,15 +21,14 @@ int	main(void)
 	void	*win;
 	t_img	img;
 	t_matrix *matrix;
-	int	raw_matrix[][5] = {
-		{0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0},
+	int	raw_matrix[][4][2] = {
+		{{1, 0xff0000},{1, 0xFFAABB}, {1, 0xff0000}, {1, 0xff0000}},
+		{{1, 0xff0000},{1, 0xFFAABB}, {1, 0xff0000}, {1, 0xff0000}},
+		{{1, 0xff0000},{1, 0xFFAABB}, {1, 0xff0000}, {1, 0xff0000}},
+		{{1, 0xff0000},{1, 0xFFAABB}, {1, 0xff0000}, {1, 0xff0000}},
 	};
 	init_minilib(&mlx, &img, &win);
-	matrix = create_matrix(5, 5, raw_matrix);
+	matrix = create_matrix(4, 4, raw_matrix);
 	matrix->scalar = 20;
 	calculate_position(matrix, &img);
 	draw_matrix(matrix, &img);

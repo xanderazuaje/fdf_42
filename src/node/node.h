@@ -18,15 +18,23 @@ typedef struct s_img t_img;
 
 typedef struct s_coords
 {
+	double			x;
+	double			y;
+	double			z;
+}					t_coords;
+
+typedef struct s_abs_coords
+{
 	int				x;
 	int				y;
 	int				z;
-}					t_coords;
+}					t_abs_coords;
 
 typedef struct s_node
 {
-	struct s_coords	abs_pos;
+	struct s_abs_coords	abs_pos;
 	struct s_coords	relative_pos;
+	struct s_coords transformed_pos;
 	struct s_node	*h_next;
 	struct s_node	*v_next;
 	int				color;
@@ -36,7 +44,11 @@ typedef struct s_matrix
 {
 	t_node			*elements;
 	int				rows;
+	int				rows_half;
+	int				is_row_odd;
 	int				columns;
+	int				columns_half;
+	int				is_col_odd;
 	int				scalar;
 	int				rotation;
 }					t_matrix;
@@ -62,7 +74,7 @@ t_node				create_node(int x, int y, int z, int color);
 void				reset_node(t_node *self);
 void				edit_node(t_node_config config, t_node *self,
 						t_config_param new_value);
-t_matrix			*create_matrix(int w, int h, int raw_matrix[w][h]);
+t_matrix			*create_matrix(int w, int h, int raw_matrix[w][h][2]);
 void				calculate_position(t_matrix *matrix, t_img *img);   
 void				draw_matrix(t_matrix *matrix, t_img *img);
 #endif

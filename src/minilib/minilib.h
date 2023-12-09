@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:58:32 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/30 16:08:34 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/12/06 21:22:56 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,18 @@ typedef struct s_img
 	int		endian;
 }			t_img;
 
+typedef struct s_rgb
+{
+	int r;
+	int g;
+	int b;
+} t_rgb;
+
 int			exittt(void);
 int			key_action(int key, t_img *img);
 int			init_minilib(void **mlx, t_img *img, void **win);
 void		put_pixel(t_img *img, int x, int y, int color);
 void		draw_line(t_node *node1, t_node *node2, t_img *img);
 void		set_minilib(void **mlx, void **win, t_img *img);
+int			get_interpolation(int c_dest, int c_origin, int steps);
 #endif
