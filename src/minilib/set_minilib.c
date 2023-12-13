@@ -6,15 +6,17 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 14:03:50 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/30 21:02:09 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/12/13 00:47:24 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilib.h"
 
-void	set_minilib(void **mlx, void **win, t_img *img)
+void	set_minilib(t_vars *vars)
 {
-	mlx_put_image_to_window(*mlx, *win, img->img_buff, 0, 0);
-	mlx_hook(*win, 2, 1L << 0, key_action, img->img_buff);
-	mlx_loop(*mlx);
+	mlx_hook(*(vars->win), 2, 1L << 0, key_action, vars->img->img_buff);
+	mlx_hook(*(vars->win), ON_MOUSEDOWN, 1L << 2, mouse_press, vars);
+	mlx_hook(*(vars->win), ON_MOUSEMOVE, 1L << 6, mouse_move, vars);
+	mlx_hook(*(vars->win), ON_MOUSEUP, 1L << 5, mouse_leave, vars);
+	mlx_loop(*(vars->mlx));
 }

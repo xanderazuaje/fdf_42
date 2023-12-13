@@ -21,6 +21,7 @@ SRC_FILES := $(SRC_DIR)/main.c \
              $(MINILIB_DIR)/parse_color.c \
              $(MINILIB_DIR)/put_pixel.c \
              $(MINILIB_DIR)/set_minilib.c \
+             $(MINILIB_DIR)/mouse_handler.c \
              $(NODE_DIR)/create_node.c \
              $(NODE_DIR)/edit_node.c \
              $(NODE_DIR)/create_matrix.c \

@@ -15,6 +15,7 @@
 # include "../fdf.h"
 
 typedef struct s_img t_img;
+typedef struct s_vars t_vars;
 
 typedef struct s_coords
 {
@@ -50,7 +51,10 @@ typedef struct s_matrix
 	int				columns_half;
 	int				is_col_odd;
 	int				scalar;
-	int				rotation;
+	int				rotation_x;
+	int				rotation_y;
+	int				mv_x;
+	int				mv_y;
 }					t_matrix;
 
 typedef enum e_node_config
@@ -76,5 +80,5 @@ void				edit_node(t_node_config config, t_node *self,
 						t_config_param new_value);
 t_matrix			*create_matrix(int w, int h, int raw_matrix[w][h][2]);
 void				calculate_position(t_matrix *matrix, t_img *img);   
-void				draw_matrix(t_matrix *matrix, t_img *img);
+void 				draw_matrix(t_vars *vars);
 #endif

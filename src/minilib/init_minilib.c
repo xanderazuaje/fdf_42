@@ -12,8 +12,6 @@
 
 #include "minilib.h"
 
-#define IMG_W 1000
-#define IMG_H 1000
 
 int	init_minilib(void **mlx, t_img *img, void **win)
 {
@@ -24,6 +22,7 @@ int	init_minilib(void **mlx, t_img *img, void **win)
 		&img->endian);
 	img->w = IMG_W;
 	img->h = IMG_H;
+	img->is_click_pressed = 0;
 	mlx_hook(*win, 17, (1L << 17), &exittt, img);
 	return (0);
 }
