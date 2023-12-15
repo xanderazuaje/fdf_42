@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:58:32 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/12/13 01:15:57 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/12/15 03:52:04 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ enum e_keys
 	NUMPAD_7 = 89,
 	NUMPAD_8 = 91,
 	NUMPAD_9 = 92,
+	MINUS = 78,
+	PLUS = 69
 };
 
 typedef enum e_mouse_events
@@ -102,7 +104,6 @@ typedef struct s_rgb
 }						t_rgb;
 
 int						exittt(void);
-int						key_action(int key, t_img *img);
 int						init_minilib(void **mlx, t_img *img, void **win);
 void					put_pixel(t_img *img, int x, int y, int color);
 void					draw_line(t_node *node1, t_node *node2, t_img *img);
@@ -112,4 +113,6 @@ int						mouse_press(int button, int x, int y, t_vars *vars);
 int						mouse_move(int x, int y, t_vars *vars);
 int 					mouse_leave(int button, int x, int y, t_vars *vars);
 void					paint_it_black(t_img *img, int w, int h);
+int						key_action(int key, t_vars *vars);
+int						mouse_scroll_down(int keycode, t_vars *vars);
 #endif

@@ -24,14 +24,16 @@ int	main(void)
 	t_vars	vars;
 
 	
-	int	raw_matrix[][4][2] = {
-		{{0, 0xff0000},{0, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}},
-		{{0, 0xff0000},{2, 0xFFAABB}, {2, 0xff0000}, {0, 0xff0000}},
-		{{0, 0xff0000},{2, 0xFFAABB}, {2, 0xff0000}, {0, 0xff0000}},
-		{{0, 0xff0000},{0, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}},
+	int	raw_matrix[][6][2] = {
+		{{13, 0xff0000}, {0, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
+		{{0, 0xff0000}, {2, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
+		{{1, 0xff0000}, {2, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
+		{{0, 0xff0000}, {0, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
+		{{0, 0xff0000}, {0, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
+		{{0, 0xff0000}, {0, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
 	};
 	init_minilib(&mlx, &img, &win);
-	matrix = create_matrix(4, 4, raw_matrix);
+	matrix = create_matrix(6, 6, raw_matrix);
 	matrix->scalar = 20;
 	vars.img = &img;
 	vars.matrix = matrix;
