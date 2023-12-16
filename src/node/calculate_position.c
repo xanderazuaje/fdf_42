@@ -53,8 +53,8 @@ void	calculate_position(t_matrix *matrix, t_img *img)
 		y = c_element->transformed_pos.y;
 		z = c_element->transformed_pos.z;
 
-		c_element->abs_pos.x = (((x - y) * cos(0.523599) * matrix->scalar) + (img->w / 2)) + (matrix->columns_half * matrix->scalar);
-		c_element->abs_pos.y = (((-z + (x + y) * sin(0.523599)) * matrix->scalar) + (img->w / 2)) + (matrix->columns_half * matrix->scalar);
+		c_element->abs_pos.x = (((x - y) * cos(0.523599) * matrix->scalar) + (img->w / 2)) + (matrix->columns_half * matrix->scalar) - (matrix->is_col_even * matrix->scalar / 2);
+		c_element->abs_pos.y = (((-z + (x + y) * sin(0.523599)) * matrix->scalar) + (img->h / 2)) + (matrix->columns_half * matrix->scalar) - (matrix->is_row_even * matrix->scalar / 2);
 		/*
 		c_element->abs_pos.x = (c_element->transformed_pos.x * matrix->scalar
 				+ (img->w / 2)) + matrix->columns_half * matrix->scalar;

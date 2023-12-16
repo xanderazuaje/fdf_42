@@ -22,6 +22,7 @@ SRC_FILES := $(SRC_DIR)/main.c \
              $(MINILIB_DIR)/put_pixel.c \
              $(MINILIB_DIR)/set_minilib.c \
              $(MINILIB_DIR)/mouse_handler.c \
+             $(MINILIB_DIR)/get_percent.c\
              $(NODE_DIR)/create_node.c \
              $(NODE_DIR)/edit_node.c \
              $(NODE_DIR)/create_matrix.c \
@@ -46,15 +47,25 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Libft targets
+libft:
+	$(MAKE) -C $(LIBFT_DIR)
+
+libft_clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
+
+libft_fclean:
+	$(MAKE) -C $(LIBFT_DIR) fclean
+
 # Phony targets
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft libft_clean libft_fclean
 
-all: $(TARGET)
+all: libft $(TARGET)
 
-clean:
+clean: libft_clean
 	rm -rf $(OBJ_DIR)
 
-fclean: clean
+fclean: clean libft_fclean
 	rm -f $(TARGET)
 
 re: fclean all

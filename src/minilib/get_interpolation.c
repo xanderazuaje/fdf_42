@@ -12,33 +12,22 @@
 
 #include "minilib.h"
 
-t_rgb	int_to_rgb(int color);
-int		rgb_to_int(t_rgb color);
 
-int	get_interpolation(int c_dest, int c_origin, int steps)
-{
-	t_rgb			org_color;
-	t_rgb			dest_color;
+int get_interpolation(int c_dest, int c_origin, double percentage) {
+    int dest_red = (c_dest >> 16) & 0xFF;
+    int dest_green = (c_dest >> 8) & 0xFF;
+    int dest_blue = c_dest & 0xFF;
 
-	org_color = int_to_rgb(c_origin);
-	dest_color = int_to_rgb(c_dest);
-	org_color.r += (org_color.r - dest_color.r) / steps;
-	org_color.g += (org_color.g - dest_color.g) / steps;
-	org_color.b += (org_color.b - org_color.b) / steps;
-	return (rgb_to_int(org_color));
-}
+    int origin_red = (c_origin >> 16) & 0xFF;
+    int origin_green = (c_origin >> 8) & 0xFF;
+    int origin_blue = c_origin & 0xFF;
 
-t_rgb	int_to_rgb(int color)
-{
-	t_rgb	to_return;
+    int interpolated_red = (int)(origin_red + percentage * (dest_red - origin_red));
+    int interpolated_green = (int)(origin_green + percentage * (dest_green - origin_green));
+    int interpolated_blue = (int)(origin_blue + percentage * (dest_blue - origin_blue));
 
-	to_return.r = color >> 16 & 0xFF;
-	to_return.g = color >> 8 & 0xFF;
-	to_return.b = color & 0xFF;
-	return (to_return);
-}
+    int interpolated_color = (interpolated_red << 16) | (interpolated_green << 8) | interpolated_blue;
 
-int	rgb_to_int(t_rgb color)
-{
-	return (color.r << 16 | color.g << 8 | color.b);
+
+    return interpolated_color;
 }

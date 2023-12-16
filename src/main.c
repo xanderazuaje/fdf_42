@@ -13,8 +13,6 @@
 #include "fdf.h"
 #include "stdio.h"
 
-// t_node **
-
 int	main(void)
 {
 	void	*mlx;
@@ -23,19 +21,20 @@ int	main(void)
 	t_matrix *matrix;
 	t_vars	vars;
 
-	
 	int	raw_matrix[][6][2] = {
-		{{13, 0xff0000}, {0, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
-		{{0, 0xff0000}, {2, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
-		{{1, 0xff0000}, {2, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
-		{{0, 0xff0000}, {0, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
-		{{0, 0xff0000}, {0, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
-		{{0, 0xff0000}, {0, 0xFFAABB}, {0, 0xff0000}, {0, 0xff0000}, {0, 0xff0000}, {3, 0xff0000}},
+		{{0, 0xffffff}, {0, 0xFF0000}, {0, 0xFFFFFF}, {0, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
+		{{0, 0xffffff}, {2, 0xFF0000}, {4, 0xFFFFFF}, {3, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
+		{{0, 0xffffff}, {5, 0xFF0000}, {2, 0xFFFFFF}, {2, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
+		{{0, 0xffffff}, {3, 0xFF0000}, {2, 0xFFFFFF}, {1, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
+		{{0, 0xffffff}, {6, 0xFF0000}, {1, 0xFFFFFF}, {3, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
+		{{0, 0xffffff}, {0, 0xFF0000}, {0, 0xFFFFFF}, {0, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
 	};
 	init_minilib(&mlx, &img, &win);
 	matrix = create_matrix(6, 6, raw_matrix);
+	if(!matrix)
+		return (0);
 	matrix->scalar = 20;
-	vars.img = &img;
+    vars.img = &img;
 	vars.matrix = matrix;
 	vars.mlx = &mlx;
 	vars.win = &win;

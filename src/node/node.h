@@ -46,11 +46,11 @@ typedef struct s_matrix
 	t_node			*elements;
 	int				rows;
 	int				rows_half;
-	int				is_row_odd;
+	uint8_t			is_row_even;
 	int				columns;
 	int				columns_half;
-	int				is_col_odd;
-	int				scalar;
+	uint8_t			is_col_even;
+	double			scalar;
 	int				rotation_x;
 	int				rotation_y;
 	int				mv_x;

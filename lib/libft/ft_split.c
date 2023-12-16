@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:48:58 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/09/20 04:08:01 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/12/15 15:08:37by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,20 @@ static size_t	word_counter(char const *s, char c)
 	return (cw);
 }
 
-static void	free_fail(char **s)
+static void	free_fail(t_splitted *splitted)
 {
 	size_t	i;
+	char	**s;
 
 	i = 0;
+	s = splitted->string;
 	while (s[i])
 	{
 		free(s[i]);
 		i++;
 	}
 	free(s);
+	free(splitted);
 }
 
 void	start_to_count(const char *s, size_t *i, size_t *end, char c)
@@ -54,31 +57,35 @@ void	start_to_count(const char *s, size_t *i, size_t *end, char c)
 		*i += 1;
 }
 
-char	**ft_split(char const *s, char c)
+t_splitted *ft_split(char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
 	size_t	end;
-	char	**new;
+	size_t	len;
+	t_splitted *new;
 
 	if (!s)
 		return (NULL);
 	i = 0;
 	j = 0;
-	new = (char **)malloc(sizeof(char *) * (word_counter(s, c) + 1));
-	if (!new)
+	len = word_counter(s, c);
+	new = (t_splitted *)malloc(sizeof(t_splitted));
+	new->string = (char **)malloc(sizeof(char *) * (len + 1));
+	new->len = len;
+	if (!new->string)
 		return (NULL);
 	while (s[i])
 	{
 		start_to_count(s, &i, &end, c);
 		if (i > end)
 		{
-			new[j] = ft_substr(s, end, i - end);
-			if (!new[j])
+			new->string[j] = ft_substr(s, end, i - end);
+			if (!new->string[j])
 				return (free_fail(new), NULL);
 			j++;
 		}
 	}
-	new[j] = NULL;
+	new->string[j] = NULL;
 	return (new);
 }

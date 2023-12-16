@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:39:54 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/12/15 12:02:54 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/12/15 16:27:00 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void draw_matrix(t_vars *vars)
     rows = 0;
     columns = 0;
     paint_it_black(vars->img, IMG_W, IMG_H);
-    //printf("TOTAL ITERATIONS %d\n", vars->matrix->columns * vars->matrix->rows);
     while (i < (vars->matrix->columns * vars->matrix->rows))
     {
-        //printf("i value %d\n", i);
         c_node = &((vars->matrix->elements)[i]);
         if(c_node->h_next)
         {

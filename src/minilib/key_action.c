@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:11:56 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/12/15 04:03:02 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/12/15 13:06:50 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	key_action(int key, t_vars *vars)
 	{
 		if(-vars->matrix->scalar * 2 * 0.1 < INT_MIN)
 			return (0);
-		printf("%d\n", vars->matrix->scalar);
+		printf("%f\n", vars->matrix->scalar);
 		vars->matrix->scalar -= vars->matrix->scalar * 0.1;
 		calculate_position(vars->matrix, vars->img);
 		draw_matrix(vars);
@@ -40,7 +40,7 @@ int	key_action(int key, t_vars *vars)
 		if(vars->matrix->scalar * 2 * 0.1 > INT_MAX)
 			return (0);
 		vars->matrix->scalar += vars->matrix->scalar * 0.1;
-		printf("%d\n", vars->matrix->scalar);
+		printf("%f\n", vars->matrix->scalar);
 		calculate_position(vars->matrix, vars->img);
 		draw_matrix(vars);
 	}

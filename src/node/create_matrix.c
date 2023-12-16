@@ -36,23 +36,21 @@ t_matrix	*create_matrix(int w, int h, int raw_matrix[h][w][2])
 	new_matrix->columns_half = w / 2;
 	new_matrix->rows = h;
 	new_matrix->rows_half = h / 2;
-	if (w % 2 != 0)
-		new_matrix->is_col_odd = 1;
+	if (w % 2 == 0)
+		new_matrix->is_col_even = 1;
 	else
-		new_matrix->is_col_odd = 0;
-	if (h % 2 != 0)
-		new_matrix->is_row_odd = 1;
+		new_matrix->is_col_even = 0;
+	if (h % 2 == 0)
+		new_matrix->is_row_even = 1;
 	else
-		new_matrix->is_row_odd = 0;
+		new_matrix->is_row_even = 0;
 
 	while (i < h)
 	{
 		while (j < w)
 		{
-			printf("rows = %d, column = %d\n", i, j);
 			c_node = &((new_matrix->elements)[i * w + j]);
 			*c_node = create_node(j - (w / 2), i - (h / 2), raw_matrix[i][j][0], raw_matrix[i][j][1]);
-			printf("Z value = %f\n", c_node->relative_pos.z);
 			if (j < w - 1)
 				c_node->h_next = &((new_matrix->elements)[i * w + j + 1]);
 			if (i < h - 1)

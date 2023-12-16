@@ -29,6 +29,7 @@ void	draw_line(t_node *node1, t_node *node2, t_img *img)
 	int		signs[2];
 	int		color;
 	t_error	error;
+	double	percentage;
 
 	coords[0] = node1->abs_pos.x;
 	coords[1] = node1->abs_pos.y;
@@ -46,9 +47,13 @@ void	draw_line(t_node *node1, t_node *node2, t_img *img)
 	error.err = diff[0] - diff[1];
 	while ((coords[0] != node2->abs_pos.x || coords[1] != node2->abs_pos.y))
 	{
+		if(abs(diff[0]) > abs(diff[1]))
+			percentage = get_percent(node1->abs_pos.x, node2->abs_pos.x, coords[0]);
+		else
+			percentage = get_percent(node1->abs_pos.y, node2->abs_pos.y, coords[1]);
 		if((coords[0] < img->w && coords[1] < img->h) && (coords[0] > 0 && coords[1] > 0))
 		{
-			put_pixel(img, coords[0], coords[1], 0xFFFFFF);
+			put_pixel(img, coords[0], coords[1], get_interpolation(node2->color, node1->color, percentage));
 		}
 		color += get_interpolation(node2->color, node1->color, 1);
 		error.e2 = 2 * error.err;
