@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:38:26 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/01/15 03:02:12 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/01/15 03:12:23 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	end_with_fdf(char *str)
 	len = ft_strlen(str);
 	if (len < 4)
 		return (0);
-	str = str + len - 5;
-	if (ft_strncmp(str, ".fdf", 4))
+	str = str + len - 4;
+	if (ft_strncmp(str, ".fdf", 4) == 0)
 		return (1);
 	return (0);
 }
