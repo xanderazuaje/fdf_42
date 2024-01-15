@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reset_node.c                                       :+:      :+:    :+:   */
+/*   parser_validators.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 05:41:19 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/28 16:07:17 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/01/15 02:03:35 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/01/15 02:12:05 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "node.h"
+#include "parser.h"
 
-void	reset_node(t_node *self)
+int	ft_ishexa(const char c)
 {
-	ft_bzero(self, sizeof(t_node));
-	self->color = 0xFFFFFFFF;
+	return (c == 'x' || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f')
+		|| ft_isdigit(c));
+}
+
+int	is_valid(const char *c, size_t *i)
+{
+	return (ft_ishexa(c[*i]) || c[*i] == ',' || c[*i] == ' ' || c[*i] == '\n'
+		|| c[*i] == '-');
 }

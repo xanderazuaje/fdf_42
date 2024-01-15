@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line copy.c                               :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:12:29 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/09 11:09:43 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2023/11/09 11:09:15 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 #include <stdio.h>
 
 char	*size_handler(ssize_t size, char **rst, t_Tuple *rtn)
@@ -34,21 +34,20 @@ char	*get_next_line(int fd)
 	ssize_t		size;
 	t_Tuple		rtn;
 
-	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
+	if ((fd < 0 || fd > FOPEN_MAX) != 0)
 		return (NULL);
-	size = 0;
 	while (1)
 	{
-		if (!len_to_nl(rst))
+		if (!len_to_char(rst, '\n'))
 		{
 			size = read(fd, str_buffer, BUFFER_SIZE);
 			if (size <= 0)
 				return (size_handler(size, &rst, &rtn));
 			str_buffer[size] = '\0';
-			rst = ft_strjoin(rst, str_buffer);
+			rst = ft_strjoin_gnl(rst, str_buffer);
 			if (!rst)
 				return (NULL);
-			if (!size && rst)
+			if (size == 0)
 				return (rtn.line = ft_strdup(rst), free(rst), rtn.line);
 		}
 		else
@@ -56,7 +55,7 @@ char	*get_next_line(int fd)
 	}
 }
 
-char	*ft_strjoin(char *rest, char *str_buffer)
+char	*ft_strjoin_gnl(char *rest, char *str_buffer)
 {
 	char	*new_str;
 	size_t	len1;
@@ -90,14 +89,14 @@ t_Tuple	dvd(char *s)
 	size_t	len;
 	t_Tuple	to_return ;
 
-	nl_pos = len_to_nl(s);
+	nl_pos = len_to_char(s, '\n');
 	len = ft_strlen(s);
 	to_return.line = NULL;
 	to_return.remain = NULL;
 	if (nl_pos)
 	{
 		to_return.line = ft_substr(s, 0, nl_pos);
-		if (!(len == nl_pos))
+		if (len != nl_pos)
 			to_return.remain = ft_substr(s, nl_pos, len - nl_pos);
 	}
 	else

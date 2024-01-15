@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "node.h"
-#include <stdlib.h>
 
 static t_coords	create_coords(int x, int y, int z);
 

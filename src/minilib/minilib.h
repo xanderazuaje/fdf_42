@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:58:32 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/12/16 13:03:38 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/01/15 02:35:30 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # include "../fdf.h"
 
 typedef struct s_node	t_node;
-typedef struct s_matrix t_matrix;
+typedef struct s_matrix	t_matrix;
 
-enum e_keys
+enum					e_keys
 {
 	ESC = 53,
 	NUMPAD_0 = 82,
@@ -31,7 +31,13 @@ enum e_keys
 	NUMPAD_8 = 91,
 	NUMPAD_9 = 92,
 	MINUS = 78,
-	PLUS = 69
+	PLUS = 69,
+	ARROW_LEFT = 123,
+	ARROW_RIGHT = 124,
+	ARROW_DOWN = 125,
+	ARROW_UP = 126,
+	KEY_Z = 6,
+	KEY_X = 7
 };
 
 typedef enum e_mouse_events
@@ -41,7 +47,7 @@ typedef enum e_mouse_events
 	MIDDLE_CLICK,
 	SCROLL_UP,
 	SCROLL_DOWN
-} t_mouse_events;
+}						t_mouse_events;
 
 typedef enum e_events
 {
@@ -64,16 +70,15 @@ typedef enum e_masks
 typedef enum e_projection
 {
 	ISOMETRIC,
-	CAVALIER,
-	SPHERE,
-	CONE
-} t_projection;
+	LINEAR,
+	IDK,
+}						t_projection;
 
 typedef struct s_control_panel
 {
 	t_projection		projection;
-	int					current_coords[2];
-	
+	int					current_coord;
+
 }						t_control_panel;
 typedef struct s_img
 {
@@ -90,11 +95,11 @@ typedef struct s_img
 
 typedef struct s_vars
 {
-	t_img				*img;
+	t_img				img;
 	t_matrix			*matrix;
-	void				**mlx;
-	void				**win;
-} t_vars;
+	void				*mlx;
+	void				*win;
+}						t_vars;
 
 typedef struct s_rgb
 {
@@ -103,16 +108,16 @@ typedef struct s_rgb
 	int					b;
 }						t_rgb;
 
-int						exittt(void);
-int						init_minilib(void **mlx, t_img *img, void **win);
+int						exittt(t_vars *vars);
+int						init_minilib(t_vars *vars);
 void					put_pixel(t_img *img, int x, int y, int color);
 void					draw_line(t_node *node1, t_node *node2, t_img *img);
-void					set_minilib(t_vars *vars);
-int						get_interpolation(int c_dest, int c_origin, double steps);
+void					set_minilib_hooks(t_vars *vars);
+int						get_interpolation(int c_dest, int c_origin,
+							double steps);
 int						mouse_press(int button, int x, int y, t_vars *vars);
 int						mouse_move(int x, int y, t_vars *vars);
-int 					mouse_leave(int button, int x, int y, t_vars *vars);
-void					paint_it_black(t_img *img, int w, int h);
+int						mouse_leave(int button, int x, int y, t_vars *vars);
 int						key_action(int key, t_vars *vars);
-double 					get_percent(int start, int end, int current);
+double					get_percent(int start, int end, int current);
 #endif

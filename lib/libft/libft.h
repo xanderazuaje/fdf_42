@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 19:03:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/12/16 19:01:22 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:44:35 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_splitted
 {
 	char			**string;
 	size_t			len;
-} 					t_splitted;
+}					t_splitted;
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
@@ -72,5 +72,6 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
-size_t				len_tochar(const char *s, int c);
+size_t				len_to_char(const char *s, int c);
+int					ft_atoi_pos(const char *str, size_t *pos);
 #endif

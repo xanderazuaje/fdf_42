@@ -1,6 +1,6 @@
 NAME = libft.a
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 
 SOURCE = ft_isalpha\
 	ft_isdigit\
@@ -45,7 +45,7 @@ SOURCE = ft_isalpha\
 	ft_lstiter\
 	ft_lstmap\
 	ft_lstnew\
-	len_tochar
+	len_to_char\
 
 
 OBJS = $(SOURCE:=.o)

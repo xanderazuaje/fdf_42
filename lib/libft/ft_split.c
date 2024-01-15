@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:48:58 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/12/15 15:08:37by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:22:03 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,35 @@ void	start_to_count(const char *s, size_t *i, size_t *end, char c)
 		*i += 1;
 }
 
-t_splitted *ft_split(char const *s, char c)
+static t_splitted	*initializer(size_t *len, char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	end;
-	size_t	len;
-	t_splitted *new;
+	t_splitted	*new;
+
+	*len = word_counter(s, c);
+	new = (t_splitted *)malloc(sizeof(t_splitted));
+	if (!new)
+		return (NULL);
+	new->string = (char **)malloc(sizeof(char *) * (*len + 1));
+	new->len = *len;
+	if (!new->string)
+		return (NULL);
+	return (new);
+}
+
+t_splitted	*ft_split(char const *s, char c)
+{
+	size_t		i;
+	size_t		j;
+	size_t		end;
+	size_t		len;
+	t_splitted	*new;
 
 	if (!s)
 		return (NULL);
 	i = 0;
 	j = 0;
-	len = word_counter(s, c);
-	new = (t_splitted *)malloc(sizeof(t_splitted));
-	new->string = (char **)malloc(sizeof(char *) * (len + 1));
-	new->len = len;
-	if (!new->string)
+	new = initializer(&len, s, c);
+	if (!new)
 		return (NULL);
 	while (s[i])
 	{
@@ -86,6 +98,5 @@ t_splitted *ft_split(char const *s, char c)
 			j++;
 		}
 	}
-	new->string[j] = NULL;
-	return (new);
+	return (new->string[j] = NULL, new);
 }

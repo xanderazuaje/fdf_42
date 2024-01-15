@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_color.c                                      :+:      :+:    :+:   */
+/*   free_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 14:43:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/30 15:23:29 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/01/15 02:18:26 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/01/15 02:58:38 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilib.h"
-#include "stdio.h"
+#include "parser.h"
 
-int	parse_color(char *hex)
+void	free_parsed(size_t lines_number, size_t words, int **const *parsed)
 {
-	int		val;
-	uint8_t	byte;
+	size_t	j;
 
-	val = 0;
-	hex += 2;
-	while (*hex)
+	j = 0;
+	while (lines_number)
 	{
-		byte = *hex++;
-		if (byte >= '0' && byte <= '9')
-			byte = byte - '0';
-		else if (byte >= 'a' && byte <= 'f')
-			byte = byte - 'a' + 10;
-		else if (byte >= 'A' && byte <= 'F')
-			byte = byte - 'A' + 10;
-		else
-			return (-1);
-		val = (val << 4) | byte;
+		while (j != words)
+		{
+			free(parsed[lines_number - 1][j++]);
+		}
+		free(parsed[lines_number - 1]);
+		j = 0;
+		lines_number--;
 	}
-	return (val);
 }

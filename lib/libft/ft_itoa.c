@@ -6,7 +6,7 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 18:58:20 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/09/19 22:16:26 by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/01/15 02:19:40 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ char	*ft_itoa(int n)
 	str[digits] = 0;
 	while (n2 >= 10)
 	{
-		str[--digits] = (n2 % 10) + '0';
+		str[--digits] = (char)((n2 % 10) + '0');
 		n2 /= 10;
 	}
-	str[--digits] = (n2 % 10) + '0';
+	str[--digits] = (char)((n2 % 10) + '0');
 	if (n < 0)
 		str[--digits] = '-';
 	return (str);

@@ -5,24 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/26 21:53:17 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/29 13:08:06by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/01/15 02:36:48 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/01/15 02:36:57 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilib.h"
 
-
-int	init_minilib(void **mlx, t_img *img, void **win)
+int	init_minilib(t_vars *vars)
 {
-	*mlx = mlx_init();
-	*win = mlx_new_window(*mlx, IMG_W, IMG_H, "FdF by Sausage");
-	img->img_buff = mlx_new_image(*mlx, IMG_W, IMG_H);
-	img->img_addr = mlx_get_data_addr(img->img_buff, &img->bits_per_pixel, &img->size_line,
-		&img->endian);
-	img->w = IMG_W;
-	img->h = IMG_H;
-	img->is_click_pressed = 0;
-	mlx_hook(*win, 17, (1L << 17), &exittt, img);
-	return (0);
+	vars->mlx = mlx_init();
+	if (!vars->mlx)
+		return (perror("creating mlx"), 0);
+	vars->win = mlx_new_window(vars->mlx, IMG_W, IMG_H, "FdF by Sausage");
+	if (!vars->win)
+		return (perror("creating mlx"), 0);
+	vars->img.img_buff = mlx_new_image(vars->mlx, IMG_W, IMG_H);
+	if (!vars->img.img_buff)
+		return (perror("creating image buff"), 0);
+	vars->img.img_addr = mlx_get_data_addr(vars->img.img_buff,
+			&vars->img.bits_per_pixel, &vars->img.size_line, &vars->img.endian);
+	if (!vars->img.img_addr)
+		return (free(vars->img.img_addr), perror("creating img addr"), 0);
+	vars->img.w = IMG_W;
+	vars->img.h = IMG_H;
+	vars->img.is_click_pressed = 0;
+	return (1);
 }

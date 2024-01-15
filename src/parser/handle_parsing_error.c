@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_percent.c                                      :+:      :+:    :+:   */
+/*   handle_parsing_error.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 12:39:26 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/01/15 02:37:46 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/01/15 02:16:00 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/01/15 02:18:10 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilib.h"
+#include "parser.h"
 
-double	get_percent(int start, int end, int current)
+void	handle_parsing_error(int ***parsed, size_t lines, size_t words, int fd)
 {
-	double	placement;
-	double	distance;
+	size_t	i;
+	size_t	j;
 
-	placement = current - start;
-	distance = end - start;
-	if (distance == 0)
-		return (1.0);
-	return ((placement / distance));
+	i = 0;
+	j = 0;
+	perror("All lines must have the same amount of columns\n");
+	while (i < lines)
+	{
+		while (j < words)
+		{
+			free(parsed[i][j]);
+			j++;
+		}
+		free(parsed[i]);
+		j = 0;
+		i++;
+	}
+	free(parsed);
+	close(fd);
 }

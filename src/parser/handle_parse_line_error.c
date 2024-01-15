@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   len_tochar.c                                       :+:      :+:    :+:   */
+/*   handle_parse_line_error.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 22:48:30 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/25 16:58:57 by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/01/15 02:13:35 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/01/15 02:13:40 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-size_t	len_tochar(const char *s, int c)
+int	***handle_parse_line_error(size_t *lines_number, int ***parsed)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
+	if (*lines_number)
 	{
-		if (s[i] == (char)c)
-			return (i);
-		i++;
+		while (*lines_number > 0)
+		{
+			free(*parsed[*lines_number]);
+			*lines_number -= 1;
+		}
+		free(*parsed[*lines_number]);
 	}
-	return (-1);
+	free(*parsed);
+	system("leaks fdf");
+	return (NULL);
 }

@@ -5,60 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/03 17:11:55 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/12/05 21:42:54by xazuaje-         ###   ########.fr       */
+/*   Created: 2024/01/15 02:23:19 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/01/15 02:28:23 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "node.h"
 #include <stdlib.h>
 
-t_matrix	*create_matrix(int w, int h, int raw_matrix[h][w][2])
+typedef struct s_cm_vars
 {
-	t_matrix *new_matrix;
-	t_node *c_node;
-	int i;
-	int j;
+	t_matrix	*new_matrix;
+	t_node		*c_node;
+	size_t		i;
+	size_t		j;
+}				t_cm_vars;
 
-	i = 0;
-	j = 0;
-	new_matrix = (t_matrix *) malloc(sizeof(t_matrix));
-	if (!new_matrix)
-		return (NULL);
-	ft_bzero(new_matrix, sizeof(t_matrix));
-	new_matrix->elements = (t_node *)malloc((w * h) * sizeof(t_node));
-	if(!new_matrix->elements)
-	{
-		free(new_matrix);
-		return (NULL);
-	}
-	new_matrix->columns = w;
-	new_matrix->columns_half = w / 2;
-	new_matrix->rows = h;
-	new_matrix->rows_half = h / 2;
-	if (w % 2 == 0)
-		new_matrix->is_col_even = 1;
-	else
-		new_matrix->is_col_even = 0;
-	if (h % 2 == 0)
-		new_matrix->is_row_even = 1;
-	else
-		new_matrix->is_row_even = 0;
+int				init_matrix(size_t w, size_t h, t_matrix **new_matrix);
 
-	while (i < h)
+void			line_drawer_bresenahm(size_t w, size_t h,
+					int **const *raw_matrix, t_cm_vars *cm_vars);
+
+t_matrix	*create_matrix(size_t w, size_t h, int ***raw_matrix)
+{
+	t_cm_vars	cm_vars;
+
+	cm_vars.j = 0;
+	cm_vars.i = 0;
+	if (!init_matrix(w, h, &cm_vars.new_matrix))
+		return (NULL);
+	line_drawer_bresenahm(w, h, raw_matrix, &cm_vars);
+	return (cm_vars.new_matrix);
+}
+
+// cv is abstration for the necessary vars
+void	line_drawer_bresenahm(size_t w, size_t h, int **const *raw_matrix,
+		t_cm_vars *cv)
+{
+	while ((*cv).i < h)
 	{
-		while (j < w)
+		while ((*cv).j < w)
 		{
-			c_node = &((new_matrix->elements)[i * w + j]);
-			*c_node = create_node(j - (w / 2), i - (h / 2), raw_matrix[i][j][0], raw_matrix[i][j][1]);
-			if (j < w - 1)
-				c_node->h_next = &((new_matrix->elements)[i * w + j + 1]);
-			if (i < h - 1)
-				c_node->v_next = &((new_matrix->elements)[i * w + j + w]);
-			j++;
+			(*cv).c_node = &(((*cv).new_matrix->elements)[(*cv).i
+					* w + (*cv).j]);
+			*(*cv).c_node = create_node((*cv).j - (w / 2),
+					(*cv).i - (h / 2),
+					raw_matrix[(*cv).i][(*cv).j][0],
+					raw_matrix[(*cv).i][(*cv).j][1]);
+			if ((*cv).j < w - 1)
+				(*cv).c_node->h_next = &(((*cv).new_matrix->elements)[(*cv).i
+						* w + (*cv).j + 1]);
+			if ((*cv).i < h - 1)
+				(*cv).c_node->v_next = &(((*cv).new_matrix->elements)[(*cv).i
+						* w + (*cv).j + w]);
+			(*cv).j++;
 		}
-		j = 0;
-		i++;
+		(*cv).j = 0;
+		(*cv).i++;
 	}
-	return (new_matrix);
+}
+
+int	init_matrix(size_t w, size_t h, t_matrix **new_matrix)
+{
+	*new_matrix = (t_matrix *)malloc(sizeof(t_matrix));
+	if (!*new_matrix)
+		return (0);
+	ft_bzero(*new_matrix, sizeof(t_matrix));
+	(*new_matrix)->elements = (t_node *)malloc((w * h) * sizeof(t_node));
+	if (!(*new_matrix)->elements)
+		return (free((*new_matrix)), 0);
+	(*new_matrix)->columns = w;
+	(*new_matrix)->rows = h;
+	(*new_matrix)->off_x = 0;
+	(*new_matrix)->off_y = 0;
+	(*new_matrix)->scalar = 20;
+	(*new_matrix)->z_scalar = 0.1;
+	return (1);
 }

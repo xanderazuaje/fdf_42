@@ -6,40 +6,49 @@
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:38:26 by xazuaje-          #+#    #+#             */
-/*   Updated: 2023/11/28 16:40:29by xazuaje-         ###   ########.fr       */
+/*   Updated: 2024/01/15 03:02:12 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "stdio.h"
 
-int	main(void)
+static int	end_with_fdf(char *str)
 {
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	t_matrix *matrix;
+	size_t	len;
+
+	len = ft_strlen(str);
+	if (len < 4)
+		return (0);
+	str = str + len - 5;
+	if (ft_strncmp(str, ".fdf", 4))
+		return (1);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	size_t	lines_number;
+	size_t	words;
+	int		***parsed;
 	t_vars	vars;
 
-	int	raw_matrix[][6][2] = {
-		{{0, 0xffffff}, {0, 0xFF0000}, {0, 0xFFFFFF}, {0, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
-		{{0, 0xffffff}, {2, 0xFF0000}, {4, 0xFFFFFF}, {3, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
-		{{0, 0xffffff}, {5, 0xFF0000}, {2, 0xFFFFFF}, {2, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
-		{{0, 0xffffff}, {3, 0xFF0000}, {2, 0xFFFFFF}, {1, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
-		{{0, 0xffffff}, {6, 0xFF0000}, {1, 0xFFFFFF}, {3, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
-		{{0, 0xffffff}, {0, 0xFF0000}, {0, 0xFFFFFF}, {0, 0xFFFFFF}, {0, 0xFFFFFF}, {3, 0xff0000}},
-	};
-	init_minilib(&mlx, &img, &win);
-	matrix = create_matrix(6, 6, raw_matrix);
-	if(!matrix)
+	if (argc != 2)
+		return (perror("Not exactly 1 parameter"), 0);
+	if (!end_with_fdf(argv[1]))
+		return (perror("wrong file extension"), 0);
+	parsed = parse_input(argv[1], &lines_number, &words);
+	if (!parsed)
 		return (0);
-	matrix->scalar = 20;
-    vars.img = &img;
-	vars.matrix = matrix;
-	vars.mlx = &mlx;
-	vars.win = &win;
-	calculate_position(matrix, &img);
+	if (!init_minilib(&vars))
+		return (free(parsed), 0);
+	vars.matrix = create_matrix(words, lines_number, parsed);
+	free_parsed(lines_number, words, parsed);
+	free(parsed);
+	if (!vars.matrix)
+		return (perror("error creating matrix"), 0);
+	vars.img.cp.projection = ISOMETRIC;
+	calculate_position(vars.matrix, &vars.img);
 	draw_matrix(&vars);
-	set_minilib(&vars);
+	set_minilib_hooks(&vars);
 	return (0);
 }

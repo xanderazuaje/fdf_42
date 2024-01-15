@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_percent.c                                      :+:      :+:    :+:   */
+/*   len_to_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xazuaje- <xazuaje-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 12:39:26 by xazuaje-          #+#    #+#             */
-/*   Updated: 2024/01/15 02:37:46 by xazuaje-         ###   ########.fr       */
+/*   Created: 2023/12/17 16:21:41 by xazuaje-          #+#    #+#             */
+/*   Updated: 2024/01/07 16:43:34 by xazuaje-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilib.h"
+#include "libft.h"
 
-double	get_percent(int start, int end, int current)
+size_t	len_to_char(const char *s, int c)
 {
-	double	placement;
-	double	distance;
+	size_t	i;
 
-	placement = current - start;
-	distance = end - start;
-	if (distance == 0)
-		return (1.0);
-	return ((placement / distance));
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return (i + 1);
+		i++;
+	}
+	return (0);
 }
